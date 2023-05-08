@@ -25,13 +25,13 @@ public class StudentSubject {
         this.subject_id = subject_id;
     }
 
-//    public long getStudent_id() {
-//        return student_id;
-//    }
-//
-//    public void setStudent_id(long student_id) {
-//        this.student_id = student_id;
-//    }
+    public long getStudent_id() {
+        return student_id;
+    }
+
+    public void setStudent_id(long student_id) {
+        this.student_id = student_id;
+    }
 
     public Date getUpdated_at() {
         return updated_at;
@@ -57,13 +57,13 @@ public class StudentSubject {
         this.random_string = random_string;
     }
 
-    public Student getStudent() {
-        return student;
-    }
-
-    public void setStudent(Student student) {
-        this.student = student;
-    }
+//    public Student getStudent() {
+//        return student;
+//    }
+//
+//    public void setStudent(Student student) {
+//        this.student = student;
+//    }
 
     @Id
     @Column(name = "id")
@@ -73,8 +73,8 @@ public class StudentSubject {
     @Column(name="subject_id")
     private long subject_id;
 
-//    @Column(name="student_id")
-//    private long student_id;
+    @Column(name="student_id")
+    private long student_id;
 
     @Column(name="updated_at")
     @UpdateTimestamp
@@ -87,7 +87,7 @@ public class StudentSubject {
     @Column(name="random_string")
     private String random_string;
 
-    @ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name="student_id", referencedColumnName = "id")
-    private Student student;
+//    @ManyToOne(fetch=FetchType.EAGER)
+//    @JoinColumn(name="student_id", referencedColumnName = "id")
+//    private Student student;
 }

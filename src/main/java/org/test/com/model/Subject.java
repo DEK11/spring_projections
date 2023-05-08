@@ -45,7 +45,7 @@ public class Subject {
     @Column(name = "subject")
     String subject;
 
-    @OneToMany(fetch=FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "subject_id", referencedColumnName = "id")
     private Set<StudentSubject> studentSubjects = new HashSet<>();
 
