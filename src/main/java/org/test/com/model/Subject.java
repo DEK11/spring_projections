@@ -16,9 +16,14 @@ public class Subject {
         this.subject = subject;
     }
 
+    public Subject(long id, String subject) {
+        this.id = id;
+        this.subject = subject;
+    }
+
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "subject_generator")
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "subject_generator")
     private long id;
 
     public long getId() {

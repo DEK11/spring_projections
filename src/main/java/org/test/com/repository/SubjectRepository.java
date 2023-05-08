@@ -2,6 +2,7 @@ package org.test.com.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.test.com.model.Subject;
 import org.test.com.model.dto.SubjectDTO;
 
@@ -16,4 +17,7 @@ public interface SubjectRepository extends JpaRepository<Subject, Long> {
             "group by sb.id, sb.subject", nativeQuery = true
     )
     Set<SubjectDTO> findSubjectsAll();
+
+    @Query("SELECT s FROM Subject s WHERE s.subject =:subject")
+    Subject findSubjectByName(@Param("subject") String subject);
 }

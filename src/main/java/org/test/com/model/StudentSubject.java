@@ -67,7 +67,7 @@ public class StudentSubject {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "subject_student_generator")
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "subject_student_generator")
     private long id;
 
     @Column(name="subject_id")

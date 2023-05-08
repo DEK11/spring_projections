@@ -12,10 +12,7 @@ import org.test.com.repository.StudentRepository;
 import org.test.com.repository.StudentSubjectRepository;
 import org.test.com.repository.SubjectRepository;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @RestController
 public class SubjectController {
@@ -46,19 +43,25 @@ public class SubjectController {
 
     @PostMapping("/subjects")
     public ResponseEntity<Subject> addStudent(@RequestBody Subject subject) {
-//        Set<StudentSubject> studentSubjects = subject.getStudentSubjects();
-//        subject.setStudentSubjects(null);
-        Subject _subject = subjectRepository.save(subject);
+
+        Subject _subject = subjectRepository.findSubjectByName(subject.getSubject());
+        if (_subject == null) {
+            _subject = new Subject();
+            _subject.setId(subject.getId());
+        }
+        _subject.setSubject(subject.getSubject());
+        _subject.setStudentSubjects(subject.getStudentSubjects());
+        Set<StudentSubject> studentSubjects = subject.getStudentSubjects();
+//        if (studentSubjects != null) {
 //        Set<StudentSubject> _studentSubjects = new HashSet<>();
 //        for(StudentSubject studentSubject: studentSubjects) {
-//            Student _student = studentRepository.save(studentSubject.getStudent());
-//            studentSubject.setStudent(null);
-//            StudentSubject _studentSubject = studentSubjectRepository.save(studentSubject);
-//            _studentSubject.setStudent(_student);
-//            _studentSubjects.add(_studentSubject);
+//            StudentSubject _studentSubject = studentSubjectRepository.findStudentSubjectLink(
+//                    studentSubject.getSubject_id(),
+//                    studentSubject.getSubject_id()
+//            );
 //        }
 //        _subject.setStudentSubjects(_studentSubjects);
-//        Subject _subject = subjectRepository.save(new Subject(subject.getSubject()));
-        return new ResponseEntity<>(_subject, HttpStatus.CREATED);
+//        }
+        return new ResponseEntity<>(subjectRepository.save(_subject), HttpStatus.CREATED);
     }
 }

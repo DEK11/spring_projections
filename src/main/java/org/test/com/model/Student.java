@@ -15,7 +15,7 @@ public class Student {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "students_generator")
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "students_generator")
     private long id;
 
     @Column(name = "name")
