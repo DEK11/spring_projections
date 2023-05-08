@@ -1,34 +1,64 @@
-create table subjects(
-id bigint PRIMARY KEY,
-subject varchar(32)
-);
-
 insert into subjects(id, subject) values(1, 'maths');
 insert into subjects(id, subject) values(2, 'physics');
 insert into subjects(id, subject) values(3, 'chemistry');
 insert into subjects(id, subject) values(4, 'english');
 insert into subjects(id, subject) values(5, 'biology');
 
-create table students(
-id bigint PRIMARY KEY,
-name varchar(32),
-email varchar(32)
-);
 
-create table subjects_students(
-subject_id bigint,
-student_id bigint
-);
+insert into subjects_students(id, subject_id, student_id, random_string, created_at, updated_at) values(1,1,1,'rtjtr','2023-01-01','2023-01-01');
+insert into subjects_students(id, subject_id, student_id, random_string, created_at, updated_at) values(2,3,1,'fsdf','2023-01-01','2023-01-02');
+insert into subjects_students(id, subject_id, student_id, random_string, created_at, updated_at) values(3,4,1,'5hrrh','2023-01-01','2023-01-03');
+insert into subjects_students(id, subject_id, student_id, random_string, created_at, updated_at) values(4,4,2,'dfggd','2023-01-01','2023-01-04');
+insert into subjects_students(id, subject_id, student_id, random_string, created_at, updated_at) values(5,3,2,'jrjrjr','2023-01-01','2023-01-05');
+insert into subjects_students(id, subject_id, student_id, random_string, created_at, updated_at) values(6,3,3,'rtjrtr','2023-01-01','2023-01-06');
+insert into subjects_students(id, subject_id, student_id, random_string, created_at, updated_at) values(7,5,3,'tjr5','2023-01-01','2023-01-07');
+insert into subjects_students(id, subject_id, student_id, random_string, created_at, updated_at) values(8,1,3,'wwrger','2023-01-01','2023-01-08');
+insert into subjects_students(id, subject_id, student_id, random_string, created_at, updated_at) values(9,1,4,'j5j5','2023-01-01','2023-01-09');
+insert into subjects_students(id, subject_id, student_id, random_string, created_at, updated_at) values(10,1,5,'46t44','2023-01-01','2023-01-10');
+insert into subjects_students(id, subject_id, student_id, random_string, created_at, updated_at) values(11,5,5,'hrt465','2023-01-01','2023-01-11');
 
-insert into subjects_students(subject_id, student_id) values(1,1);
-insert into subjects_students(subject_id, student_id) values(3,1);
-insert into subjects_students(subject_id, student_id) values(4,1);
-insert into subjects_students(subject_id, student_id) values(4,2);
-insert into subjects_students(subject_id, student_id) values(3,2);
-insert into subjects_students(subject_id, student_id) values(3,3);
-insert into subjects_students(subject_id, student_id) values(5,3);
-insert into subjects_students(subject_id, student_id) values(1,3);
-insert into subjects_students(subject_id, student_id) values(1,4);
-insert into subjects_students(subject_id, student_id) values(1,5);
-insert into subjects_students(subject_id, student_id) values(5,5);
 
+
+
+
+Below DDL operation is done by hibernate on start:-
+
+Hibernate:
+
+    create table students (
+       id bigserial not null,
+        email varchar(255),
+        name varchar(255),
+        primary key (id)
+    )
+Hibernate:
+
+    create table subjects (
+       id bigserial not null,
+        subject varchar(255),
+        primary key (id)
+    )
+Hibernate:
+
+    create table subjects_students (
+       id bigint not null,
+        created_at timestamp(6),
+        random_string varchar(255),
+        subject_id bigint,
+        updated_at timestamp(6),
+        student_id bigint,
+        primary key (id)
+    )
+Hibernate: create sequence subject_student_generator start with 1 increment by 50
+Hibernate:
+
+    alter table if exists subjects_students
+       add constraint FKfwe627h9l4w4o56kssl2ijf06
+       foreign key (student_id)
+       references students
+Hibernate:
+
+    alter table if exists subjects_students
+       add constraint FK8b0cg3t7c7wj4g3udq0g4wqm5
+       foreign key (subject_id)
+       references subjects

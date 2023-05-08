@@ -18,7 +18,7 @@ public class Subject {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "subject_generator")
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "subject_generator")
     private long id;
 
     public long getId() {
@@ -40,24 +40,15 @@ public class Subject {
     @Column(name = "subject")
     String subject;
 
-    @ManyToMany(fetch=FetchType.LAZY)
-    @JoinTable(
-            name = "subjects_students",
-            joinColumns = @JoinColumn(name = "subject_id"),
-            inverseJoinColumns = @JoinColumn(name = "student_id")
-    )
-    private Set<Student> students = new HashSet<>();
+    @OneToMany(fetch=FetchType.LAZY)
+    @JoinColumn(name = "subject_id", referencedColumnName = "id")
+    private Set<StudentSubject> studentSubjects = new HashSet<>();
 
-    public Set<Student> getStudents() {
-        return students;
+    public Set<StudentSubject> getStudentSubjects() {
+        return studentSubjects;
     }
 
-    public void setStudents(Set<Student> students) {
-        this.students = students;
-    }
-
-    @Override
-    public String toString() {
-        return "Subject [id=" + this.id + ", subject=" + this.subject + ", students= [" + this.students + "] ]";
+    public void setStudentSubjects(Set<StudentSubject> studentSubjects) {
+        this.studentSubjects = studentSubjects;
     }
 }

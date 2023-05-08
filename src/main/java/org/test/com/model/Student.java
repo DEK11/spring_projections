@@ -2,9 +2,6 @@ package org.test.com.model;
 
 import jakarta.persistence.*;
 
-import java.util.List;
-import java.util.Set;
-
 @Entity
 @Table(name = "students")
 public class Student {
@@ -18,7 +15,7 @@ public class Student {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "students_generator")
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "students_generator")
     private long id;
 
     @Column(name = "name")
@@ -45,10 +42,5 @@ public class Student {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    @Override
-    public String toString() {
-        return "Student [id=" + this.id + ", name=" + this.name + ", email=" + this.email + "]";
     }
 }
